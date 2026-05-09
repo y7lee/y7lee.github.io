@@ -1,0 +1,48 @@
+# ── Site ──────────────────────────────────
+title: y7lee
+author:
+  name: y7lee
+  email: ""
+description: "Crypto Researcher / DeFi Builder"
+baseurl: ""
+url: "https://y7lee.github.io"
+
+# ── Build ─────────────────────────────────
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /posts/:title/
+
+paginate: 10
+paginate_path: /page/:num/
+
+# ── Plugins ───────────────────────────────
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# ── Defaults ──────────────────────────────
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - demo-style-a.html
+  - demo-style-b.html
+  - demo-style-c.html
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .gitignore

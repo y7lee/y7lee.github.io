@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="{{ site.author.name }}">
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+  <link rel="icon" href="/images/profilepic.png">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/feed.xml' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% seo %}
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <a href="/" class="sidebar-avatar">
+          <img src="/images/profilepic.png" alt="avatar">
+        </a>
+        <h2 class="sidebar-name">{{ site.author.name }}</h2>
+        <p class="sidebar-bio">{{ site.description }}</p>
+
+        <nav class="sidebar-nav">
+          <a href="/" {% if page.url == "/" %}class="active"{% endif %}>Posts</a>
+          <a href="/aboutme/" {% if page.url == "/aboutme/" %}class="active"{% endif %}>About</a>
+          <a href="/roadmap/" {% if page.url == "/roadmap/" %}class="active"{% endif %}>Roadmap</a>
+          <a href="/tags/" {% if page.url == "/tags/" %}class="active"{% endif %}>Tags</a>
+        </nav>
+
+        <div class="sidebar-links">
+          <a href="https://github.com/y7lee" target="_blank">GitHub</a>
+          <a href="https://twitter.com/wqw_lee" target="_blank">Twitter</a>
+          <a href="/feed.xml">RSS</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      {{ content }}
+    </main>
+  </div>
+</body>
+</html>
