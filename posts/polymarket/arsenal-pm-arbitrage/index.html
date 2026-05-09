@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <script type="application/ld+json">
+
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Arsenal 2025-26 Polymarket 跨市场套利分析",
+
+  "datePublished": "2026-05-09T09:00:00+08:00",
+  "dateModified": "2026-05-09T09:00:00+08:00",
+  "author": {
+    "@type": "Person",
+    "name": "y7lee",
+
+    "image": "/images/profilepic.png"
+
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "\/posts\/polymarket\/arsenal-pm-arbitrage\/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "y7lee",
+
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/profilepic.png"
+    }
+
+  },
+  "description": "对 Polymarket 上四个 Arsenal 赛季市场进行概率建模，推导隐含世界状态，分析 negRisk 池内与跨市场套利机会，并揭示流动性失衡与结构性问题。",
+  "keywords": ["polymarket","arbitrage","arsenal","prediction market","negRisk","probability"]
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.105.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="y7lee">
+<meta name="keywords" content="polymarket,arbitrage,arsenal,prediction market,negRisk,probability">
+<meta name="description" content="对 Polymarket 上四个 Arsenal 赛季市场进行概率建模，推导隐含世界状态，分析 negRisk 池内与跨市场套利机会。">
+
+
+<meta property="og:description" content="对 Polymarket 上四个 Arsenal 赛季市场进行概率建模，推导隐含世界状态，分析 negRisk 池内与跨市场套利机会。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arsenal 2025-26 Polymarket 跨市场套利分析">
+<meta name="twitter:title" content="Arsenal 2025-26 Polymarket 跨市场套利分析">
+<meta property="og:url" content="/posts/polymarket/arsenal-pm-arbitrage/">
+<meta property="twitter:url" content="/posts/polymarket/arsenal-pm-arbitrage/">
+<meta property="og:site_name" content="y7lee">
+<meta property="og:description" content="对 Polymarket 上四个 Arsenal 赛季市场进行概率建模，推导隐含世界状态，分析 negRisk 池内与跨市场套利机会。">
+<meta name="twitter:description" content="对 Polymarket 上四个 Arsenal 赛季市场进行概率建模，推导隐含世界状态，分析 negRisk 池内与跨市场套利机会。">
+<meta property="og:locale" content="en-us">
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@https:/twitter.com/wqw_lee">
+
+
+  <meta name="twitter:creator" content="@https:/twitter.com/wqw_lee">
+
+
+
+
+
+
+  <meta property="og:image" content="/images/profilepic.png">
+  <meta property="twitter:image" content="/images/profilepic.png">
+
+
+
+
+
+
+    <title>Arsenal 2025-26 Polymarket 跨市场套利分析</title>
+
+    <link rel="icon" href="/images/profilepic.png">
+
+
+    <link rel="canonical" href="/posts/polymarket/arsenal-pm-arbitrage/">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+
+
+
+
+
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/" aria-label="Go to homepage">y7lee</a>
+  </div>
+
+
+      <a class="header-right-icon open-algolia-search"
+         href="/search" aria-label="Open the link: /search">
+
+
+      <i class="fa fa-lg fa-search"></i>
+
+
+    </a>
+
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+
+      <div class="sidebar-profile">
+        <a href="/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="/images/profilepic.png" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">y7lee</h4>
+
+          <h5 class="sidebar-profile-bio">for freedom!</h5>
+
+      </div>
+
+    <ul class="sidebar-buttons">
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="/aboutme" title="About Me">
+
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">About Me</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="/" title="My Posts">
+
+      <i class="sidebar-button-icon fas fa-lg fa-lightbulb" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">My Posts</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="/roadmap" title="Roadmap">
+
+      <i class="sidebar-button-icon fas fa-solid fa-compass" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">Roadmap</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="/tags" title="Tags">
+
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="/categories" title="Categories">
+
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="https://github.com/y7lee" title="GitHub">
+
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+
+      <a class="sidebar-button-link " href="https://twitter.com/wqw_lee" title="twitter">
+
+      <i class="sidebar-button-icon fab fa-lg fa-twitter" aria-hidden="true"></i>
+
+      <span class="sidebar-button-desc">twitter</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+
+
+    </ul>
+  </div>
+</nav>
+
+
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+
+
+            <div class="post-header main-content-wrap text-left">
+
+    <h1 class="post-title">
+      Arsenal 2025-26 Polymarket 跨市场套利分析
+    </h1>
+
+
+  <div class="postShorten-meta post-meta">
+
+      <time datetime="2026-05-09T09:00:00+08:00">
+
+  May 9, 2026
+
+      </time>
+
+
+  </div>
+
+</div>
+
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+
+<p><em>数据抓取时间：2026-05-07（赛后：欧冠半决赛淘汰马竞、英超剩 3 轮）| 数据源：Polymarket Gamma API /events + /markets</em></p>
+
+<h1 id="活跃市场总览">一、活跃市场总览</h1>
+
+<p>Arsenal 目前在 Polymarket 上有 <strong>4 个未结束市场</strong>（Carabao Cup 已输、FA Cup 归曼联，均已结算）：</p>
+
+<table>
+<thead><tr><th>#</th><th>市场</th><th>Yes</th><th>No</th><th>交易量</th><th>截止</th><th>negRisk</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Arsenal 赢得英超</td><td><strong>79.5%</strong></td><td>20.5%</td><td>$11.1M</td><td>2026-05-27</td><td>是</td></tr>
+<tr><td>2</td><td>Arsenal 赢得欧冠</td><td><strong>41.5%</strong></td><td>58.5%</td><td>$6.7M</td><td>2026-05-31</td><td>是</td></tr>
+<tr><td>3</td><td>Arsenal 赢得任意奖杯</td><td><strong>84.4%</strong></td><td>15.6%</td><td>$0.33M</td><td>2026-05-30</td><td>否</td></tr>
+<tr><td>4</td><td>Arsenal 英超第 2 名</td><td><strong>20.0%</strong></td><td>80.0%</td><td>$2.6M</td><td>2026-05-27</td><td>是</td></tr>
+</tbody>
+</table>
+
+<p><strong>奖杯市场说明</strong>：条款涵盖 EPL + UCL + Carabao + FA Cup。后两者已结束，当前等价于 <strong>EPL OR UCL</strong>。</p>
+
+<h1 id="negrisk-池分布">二、各 negRisk 池完整分布</h1>
+
+<h2 id="epl-winner">EPL Winner（20 队，&Sigma;Yes = 0.990）</h2>
+
+<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:12px 0">
+  <rect x="0" y="0" width="500" height="200" fill="#1a1a2e" rx="6"/>
+  <text x="250" y="22" fill="#e0e0e0" text-anchor="middle" font-size="12" font-weight="bold">&Sigma;Yes = 0.990 &lt; 1 &rarr; 理论买入全套 Yes 成本 $0.99 得 $1（+1.0%），gas 费吃掉利润</text>
+  <!-- Arsenal 79.5% -->
+  <rect x="20" y="35" width="100" height="16" fill="#e94560" rx="3"/>
+  <text x="130" y="48" fill="#e0e0e0" font-size="11">Arsenal 79.5%</text>
+  <rect x="20" y="36" width="79.5*4.4=350" height="14" fill="#e94560" opacity="0.9" rx="2"/>
+  <rect x="20" y="35" width="350" height="16" fill="#e94560" rx="4">
+    <animate attributeName="width" from="0" to="350" dur="0.5s" fill="freeze"/>
+  </rect>
+  <!-- Man City 19.5% -->
+  <rect x="20" y="58" width="100" height="16" fill="#0f3460" rx="3"/>
+  <text x="130" y="71" fill="#e0e0e0" font-size="11">Man City 19.5%</text>
+  <rect x="20" y="58" width="86" height="16" fill="#0f3460" rx="4"/>
+  <!-- Others -->
+  <rect x="20" y="81" width="100" height="16" fill="#16213e" rx="3"/>
+  <text x="130" y="94" fill="#999" font-size="10">Brentford / Liverpool / Newcastle / Chelsea ... (12 队) 0.0%</text>
+  <line x1="20" y1="82" x2="24" y2="89" stroke="#444" stroke-width="1"/>
+  <text x="390" y="164" fill="#666" font-size="9" text-anchor="end">最大宽度 = 79.5% of scale</text>
+</svg>
+
+<h2 id="ucl-winner">UCL Winner（60 队，&Sigma;Yes = 1.015）</h2>
+
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:12px 0">
+  <rect x="0" y="0" width="500" height="180" fill="#1a1a2e" rx="6"/>
+  <text x="250" y="22" fill="#e0e0e0" text-anchor="middle" font-size="12" font-weight="bold">&Sigma;Yes = 1.015 &gt; 1 &rarr; 被超买，决赛圈 3 队被多头抢筹</text>
+  <text x="250" y="40" fill="#999" text-anchor="middle" font-size="10">57 个已淘汰队伍 Yes=0，没有卖家做空；剩余 3 队多军涌入</text>
+  <!-- Arsenal 41.5% -->
+  <rect x="20" y="55" width="185" height="18" fill="#e94560" rx="4"/>
+  <text x="215" y="69" fill="#e0e0e0" font-size="11">Arsenal 41.5%</text>
+  <!-- Bayern 31.5% -->
+  <rect x="20" y="80" width="140" height="18" fill="#0f3460" rx="4"/>
+  <text x="170" y="94" fill="#e0e0e0" font-size="11">Bayern Munich 31.5%</text>
+  <!-- PSG 28.5% -->
+  <rect x="20" y="105" width="127" height="18" fill="#533483" rx="4"/>
+  <text x="157" y="119" fill="#e0e0e0" font-size="11">PSG 28.5%</text>
+  <text x="390" y="164" fill="#666" font-size="9" text-anchor="end">bar width = percentage &times; 4.5</text>
+</svg>
+
+<h2 id="epl-2nd">EPL 2nd Place（20 队，&Sigma;Yes = 0.996）</h2>
+
+<p>Man City 79.5% | Arsenal 20.0% | 其余 18 队 0.0%</p>
+
+<h1 id="隐含世界状态">三、市场隐含的世界状态</h1>
+
+<p>由三个 Arsenal 市场的 Yes 价格推导出四种互斥状态的概率：</p>
+
+<svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:16px auto">
+  <rect x="0" y="0" width="520" height="360" fill="#1a1a2e" rx="8"/>
+
+  <!-- Title -->
+  <text x="260" y="28" fill="#e0e0e0" text-anchor="middle" font-size="14" font-weight="bold">Arsenal 赛季结局概率象限</text>
+
+  <!-- Quadrant grid -->
+  <line x1="260" y1="45" x2="260" y2="295" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+  <line x1="30" y1="170" x2="490" y2="170" stroke="#444" stroke-width="1" stroke-dasharray="4"/>
+
+  <!-- Axis labels -->
+  <text x="260" y="320" fill="#999" text-anchor="middle" font-size="11">UCL Winner</text>
+  <text x="260" y="336" fill="#e94560" text-anchor="middle" font-size="10">YES (41.5%) &larr; &mdash; &rarr; NO (58.5%)</text>
+  <text x="10" y="160" fill="#999" text-anchor="middle" font-size="11" transform="rotate(-90,10,160)">EPL Winner</text>
+  <text x="-10" y="160" fill="#e94560" text-anchor="middle" font-size="9" transform="rotate(-90,-10,160)">YES (79.5%) &uarr;</text>
+  <text x="505" y="160" fill="#e94560" text-anchor="middle" font-size="9" transform="rotate(-90,505,160)">&darr; NO (20.5%)</text>
+
+  <!-- Quad 1: 双冠王 (EPL YES, UCL YES) -->
+  <rect x="260" y="48" width="225" height="119" fill="#e94560" opacity="0.35" rx="4"/>
+  <text x="372" y="88" fill="#fff" text-anchor="middle" font-size="22" font-weight="bold">36.6%</text>
+  <text x="372" y="112" fill="#e0e0e0" text-anchor="middle" font-size="13">双冠王</text>
+  <text x="372" y="132" fill="#aaa" text-anchor="middle" font-size="10">EPL &amp; UCL</text>
+
+  <!-- Quad 2: 仅英超 (EPL YES, UCL NO) -->
+  <rect x="30" y="48" width="225" height="119" fill="#f39c12" opacity="0.35" rx="4"/>
+  <text x="142" y="88" fill="#fff" text-anchor="middle" font-size="22" font-weight="bold">42.9%</text>
+  <text x="142" y="112" fill="#e0e0e0" text-anchor="middle" font-size="13">仅英超</text>
+  <text x="142" y="132" fill="#aaa" text-anchor="middle" font-size="10">EPL only</text>
+
+  <!-- Quad 3: 仅欧冠 (EPL NO, UCL YES) -->
+  <rect x="260" y="173" width="225" height="119" fill="#533483" opacity="0.35" rx="4"/>
+  <text x="372" y="213" fill="#fff" text-anchor="middle" font-size="22" font-weight="bold">4.9%</text>
+  <text x="372" y="237" fill="#e0e0e0" text-anchor="middle" font-size="13">仅欧冠</text>
+  <text x="372" y="257" fill="#aaa" text-anchor="middle" font-size="10">UCL only</text>
+
+  <!-- Quad 4: 四大皆空 (EPL NO, UCL NO) -->
+  <rect x="30" y="173" width="225" height="119" fill="#2c3e50" opacity="0.35" rx="4"/>
+  <text x="142" y="213" fill="#fff" text-anchor="middle" font-size="22" font-weight="bold">15.6%</text>
+  <text x="142" y="237" fill="#e0e0e0" text-anchor="middle" font-size="13">四大皆空</text>
+  <text x="142" y="257" fill="#aaa" text-anchor="middle" font-size="10">Nothing</text>
+
+  <!-- Trophy boundary -->
+  <text x="500" y="348" fill="#666" font-size="8" text-anchor="end">Trophy = 双冠 + 仅英超 + 仅欧冠 = 84.4%</text>
+</svg>
+
+<h2 id="推导过程">推导过程</h2>
+
+<div style="background:#16213e;border-radius:8px;padding:16px 20px;margin:16px 0;font-family:monospace;font-size:13px;line-height:1.8;color:#b0d0ff">
+P(Trophy) = P(EPL &cup; UCL) = P(EPL) + P(UCL) - P(EPL &cap; UCL)<br/>
+0.8445     = 0.795   + 0.415   - P(双冠)<br/><br/>
+&rarr; P(双冠)   = 0.795 + 0.415 - 0.8445 = <strong style="color:#e94560">0.3655</strong> (36.6%)<br/>
+&rarr; P(仅英超) = 0.795 - 0.3655          = <strong style="color:#f39c12">0.4295</strong> (42.9%)<br/>
+&rarr; P(仅欧冠) = 0.415 - 0.3655          = <strong style="color:#533483">0.0495</strong> ( 4.9%)<br/>
+&rarr; P(无冠)   = 1 - 0.8445             = <strong style="color:#7f8c8d">0.1555</strong> (15.6%)
+</div>
+
+<h2 id="隐含条件概率">隐含条件概率</h2>
+
+<svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:16px 0">
+  <rect x="0" y="0" width="500" height="220" fill="#1a1a2e" rx="8"/>
+
+  <!-- P(UCL|EPL) -->
+  <text x="30" y="35" fill="#e0e0e0" font-size="11">P(UCL | EPL) &nbsp; 拿英超后欧冠胜率</text>
+  <rect x="30" y="42" width="440" height="14" fill="#16213e" rx="7"/>
+  <rect x="30" y="42" width="202" height="14" fill="#e94560" rx="7"/>
+  <text x="445" y="52" fill="#e94560" font-size="10" text-anchor="end">46.0%</text>
+
+  <!-- P(UCL|~EPL) -->
+  <text x="30" y="80" fill="#e0e0e0" font-size="11">P(UCL | ~EPL) &nbsp; 不拿英超则欧冠希望</text>
+  <rect x="30" y="87" width="440" height="14" fill="#16213e" rx="7"/>
+  <rect x="30" y="87" width="106" height="14" fill="#e94560" rx="7"/>
+  <text x="445" y="97" fill="#e94560" font-size="10" text-anchor="end">24.1%</text>
+
+  <!-- P(EPL|UCL) -->
+  <text x="30" y="125" fill="#e0e0e0" font-size="11">P(EPL | UCL) &nbsp; 拿欧冠几乎意味着双冠</text>
+  <rect x="30" y="132" width="440" height="14" fill="#16213e" rx="7"/>
+  <rect x="30" y="132" width="388" height="14" fill="#f39c12" rx="7"/>
+  <text x="445" y="142" fill="#f39c12" font-size="10" text-anchor="end">88.1%</text>
+
+  <!-- P(EPL|~UCL) -->
+  <text x="30" y="170" fill="#e0e0e0" font-size="11">P(EPL | ~UCL) &nbsp; 没拿欧冠仍有七成英超</text>
+  <rect x="30" y="177" width="440" height="14" fill="#16213e" rx="7"/>
+  <rect x="30" y="177" width="323" height="14" fill="#f39c12" rx="7"/>
+  <text x="445" y="187" fill="#f39c12" font-size="10" text-anchor="end">73.3%</text>
+
+  <text x="390" y="210" fill="#666" font-size="8" text-anchor="end">bar = conditional probability as % of max range</text>
+</svg>
+
+<div class="alert info">
+<p>市场赋予了英超和欧冠之间极高的正相关性。实际上 EPL 收官（5/24）和 UCL 决赛（5/30）只隔 6 天，两场硬仗的体能消耗应该是<strong>负相关因素</strong>，但市场却在定价"赢一场就更可能赢第二场"。</p>
+</div>
+
+<h1 id="套利分析">四、套利分析</h1>
+
+<h2 id="negrisk-池内套利">4.1 negRisk 池内套利</h2>
+
+<table>
+<thead><tr><th>池</th><th>&Sigma;Yes</th><th>方向</th><th>理论收益</th><th>实际可行性</th></tr></thead>
+<tbody>
+<tr><td>EPL Winner</td><td>0.990</td><td>买全部 Yes</td><td>+1.0%</td><td>需 20 笔交易，gas &gt; 利润</td></tr>
+<tr><td>UCL Winner</td><td>1.015</td><td>卖全部 No</td><td>+0.025%</td><td>需 60 笔，57 个已淘汰 No=$1 无利差</td></tr>
+<tr><td>EPL 2nd Place</td><td>0.996</td><td>买全部 Yes</td><td>+0.4%</td><td>同上，gas 问题</td></tr>
+</tbody>
+</table>
+
+<p><strong>结论：negRisk 池内套利在数学上存在，但 Polymarket Polygon 链上的 gas 成本 + 滑点将利润蚕食至零。</strong></p>
+
+<h2 id="跨市场套利">4.2 跨市场套利</h2>
+
+<p>三个 Arsenal 市场<strong>不属于同一 negRisk 组</strong>。构造线性规划：</p>
+
+<p>设 x1~x6 分别为 EPL-Y, EPL-N, UCL-Y, UCL-N, Trophy-Y, Trophy-N 的持仓数。</p>
+
+<p>四种状态下等额支付的约束：</p>
+
+<div style="background:#16213e;border-radius:8px;padding:16px 20px;margin:16px 0;font-family:monospace;font-size:12px;line-height:1.8;color:#b0d0ff">
+(EPL, UCL): &nbsp;&nbsp;&nbsp;&nbsp; x1 + x3 + x5 = V<br/>
+(EPL, ~UCL): &nbsp;&nbsp;&nbsp; x1 + x4 + x5 = V<br/>
+(~EPL, UCL): &nbsp;&nbsp;&nbsp; x2 + x3 + x5 = V<br/>
+(~EPL, ~UCL): &nbsp;&nbsp; x2 + x4 + x6 = V<br/><br/>
+解得：x1=x2, x3=x4, x5=x6。<br/>
+总成本 = x1(0.795+0.205) + x3(0.415+0.585) + x5(0.8445+0.1555) = x1 + x3 + x5<br/>
+总收益 = x1 + x3 + x5<br/><br/>
+&rarr; <strong style="color:#e94560">零利差。中点价不存在跨市场套利。</strong>
+</div>
+
+<h2 id="为什么看起来有套利">4.3 为什么没套利但看起来有？</h2>
+
+<p>三个市场的中点价满足概率论的基本约束（Kolmogorov 公理）。价格的"缝隙"不在中点价，而在：</p>
+<ul>
+<li><strong>Bid/Ask Spread</strong>：实际成交价偏离中点 1-3 美分</li>
+<li><strong>流动性不均</strong>：Trophy 市场只有 $325K vol，大单会推动价格</li>
+<li><strong>手续费</strong>：maker 0.1% / taker 0.1%</li>
+</ul>
+
+<h1 id="结构性发现">五、结构性发现</h1>
+
+<h2 id="流动性失衡">5.1 流动性极度失衡</h2>
+
+<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;display:block;margin:16px 0">
+  <rect x="0" y="0" width="500" height="200" fill="#1a1a2e" rx="8"/>
+
+  <text x="250" y="25" fill="#e0e0e0" text-anchor="middle" font-size="12" font-weight="bold">市场交易量对比</text>
+
+  <!-- EPL -->
+  <rect x="40" y="45" width="410" height="28" fill="#e94560" rx="5"/>
+  <text x="55" y="64" fill="#fff" font-size="11" font-weight="bold">EPL Winner</text>
+  <text x="455" y="64" fill="#fff" font-size="10" text-anchor="end">$11.1M</text>
+
+  <!-- UCL -->
+  <rect x="40" y="85" width="248" height="28" fill="#e94560" opacity="0.7" rx="5"/>
+  <text x="55" y="104" fill="#fff" font-size="11" font-weight="bold">UCL Winner</text>
+  <text x="293" y="104" fill="#fff" font-size="10" text-anchor="end">$6.7M</text>
+
+  <!-- Trophy -->
+  <rect x="40" y="125" width="12" height="28" fill="#f39c12" rx="5"/>
+  <text x="62" y="144" fill="#f39c12" font-size="11" font-weight="bold">Trophy</text>
+  <text x="57" y="144" fill="#f39c12" font-size="10">$0.33M</text>
+
+  <text x="250" y="176" fill="#999" text-anchor="middle" font-size="10">Trophy ($325K) 比前两者小 20-30 倍，几万元买卖就能推动价格几个百分点</text>
+</svg>
+
+<p>一个 $325K 的小池子，在给 $18M 的大池子当"衍生品定价锚"。<strong>几万元的买卖就能推动 Trophy 价格几个百分点</strong>，而它反过来又影响市场对 P(双冠) 的隐含估计。</p>
+
+<h2 id="缺少双冠市场">5.2 缺少"双冠王"市场</h2>
+
+<p>Polymarket 有这三个市场，但<strong>没有</strong> "Arsenal to win the Double" 市场。这是最自然的衍生品——三个已有市场隐含双冠概率 36.6%，直接开一个双冠市场可以：</p>
+<ul>
+<li>为套利者提供更直接的 hedge 工具</li>
+<li>让 Polymarket 收割新的交易费</li>
+<li>消除三个分散市场之间的价格摩擦</li>
+</ul>
+<p>没有开，可能是事件创建者还没注意到。</p>
+
+<h2 id="ucl-超买">5.3 UCL 池被多头挤爆的结构性原因</h2>
+
+<p>&Sigma;Yes = 1.015 是一个值得注意的信号。正常 negRisk 池 &Sigma;Yes &asymp; 0.98-0.995（被手续费压到 1 以下）。超买的原因：</p>
+<ol>
+<li>57 个已淘汰队伍的 Yes 被精准打到 0.00，没有卖家</li>
+<li>剩余 3 个热门队被多军抢筹，推高了整体 &Sigma;Yes</li>
+<li>没有人做空已淘汰队伍的 Yes（反正快结算了，占用资金不划算）</li>
+</ol>
+<p>这导致 &Sigma;Yes 在决赛阶段系统性偏高——这是<strong>negRisk 机制在赛事末期的结构性特征</strong>，不是套利机会。</p>
+
+<h2 id="隐含相关性过高">5.4 隐含相关性可能过高</h2>
+
+<p>市场定价：赢一场 &rarr; 另一场胜率翻倍（24% &rarr; 46%）。</p>
+<p>足球现实：EPL 最后三轮 + UCL 决赛集中在 10 天内，体能消耗、伤病风险、心理压力都是<strong>负相关驱动因素</strong>。如果真实相关性低于市场隐含值，那么：</p>
+<ul>
+<li><strong>Trophy No @ 15.6% 被低估</strong>（真实概率可能更高）</li>
+<li><strong>EPL Yes + UCL Yes 同时持有</strong>有正的期望收益，但承担了过多相关性风险</li>
+</ul>
+
+<h1 id="数据速查">六、关键数据速查</h1>
+
+<table>
+<thead><tr><th>指标</th><th>值</th><th>指标</th><th>值</th></tr></thead>
+<tbody>
+<tr><td>P(EPL)</td><td>79.5%</td><td>P(双冠)</td><td>36.6%</td></tr>
+<tr><td>P(UCL)</td><td>41.5%</td><td>P(仅英超)</td><td>42.9%</td></tr>
+<tr><td>P(Trophy)</td><td>84.4%</td><td>P(仅欧冠)</td><td>4.9%</td></tr>
+<tr><td>P(UCL|EPL)</td><td>46.0%</td><td>P(四大皆空)</td><td>15.6%</td></tr>
+<tr><td>P(UCL|~EPL)</td><td>24.1%</td><td>P(EPL|~UCL)</td><td>73.3%</td></tr>
+<tr><td>P(EPL|UCL)</td><td>88.1%</td><td>&Sigma;Yes UCL Pool</td><td>1.015</td></tr>
+</tbody>
+</table>
+
+<h1 id="数据来源">七、数据来源</h1>
+
+<ul>
+<li>Polymarket Gamma API: <code>GET /events/slug/{slug}</code> + <code>GET /markets/{id}</code></li>
+<li>EPL Winner: <code>english-premier-league-winner</code>, Arsenal 子市场 ID 566187</li>
+<li>UCL Winner: <code>uefa-champions-league-winner</code>, Arsenal 子市场 ID 566140</li>
+<li>Win a Trophy: market ID 1193498</li>
+<li>EPL 2nd Place: <code>english-premier-league-2nd-place</code>, Arsenal 子市场 ID 572733</li>
+</ul>
+
+<p><em>分析代码见 <code>polymarket/market_making/vps_bot/football.py</code> 中的 Gamma API 调用模式。</em></p>
+
+
+            </div>
+          </div>
+
+          <div class="post-footer main-content-wrap">
+
+
+            <div class="post-actions-wrap">
+              <nav>
+                <ul class="post-actions post-action-nav">
+
+                    <li class="post-action">
+
+                        <a class="post-action-btn btn btn--disabled">
+
+                        </a>
+                    </li>
+
+                </ul>
+              </nav>
+              <ul class="post-actions post-action-share">
+
+                  <li class="post-action hide-lg hide-md hide-sm">
+                    <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                      <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    </a>
+                  </li>
+
+
+              </ul>
+            </div>
+
+
+          </div>
+
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2026 y7lee. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+    </div>
+  </div>
+
+<div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+
+      <img id="about-card-picture" src="/images/profilepic.png" alt="Author&#39;s picture" />
+
+
+    <h4 id="about-card-name">y7lee</h4>
+
+
+    <div id="about-card-bio">for freedom!</div>
+
+
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Crypto Researcher / DeFi Builder
+      </div>
+
+  </div>
+</div>
+
+
+
+  </body>
+</html>
