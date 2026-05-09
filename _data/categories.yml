@@ -1,0 +1,23 @@
+- name: DeFi & MEV
+  slug: defi-mev
+  jekyll_category: defi
+  image: /images/cover.jpg
+  description: MEV supply chain, yield strategies, and DeFi protocol deep dives
+
+- name: On-chain Data
+  slug: onchain-data
+  jekyll_category: blockchain
+  image: /images/1.jpg
+  description: Transaction tracing, UTXO analysis, and on-chain macro indicators
+
+- name: Prediction Markets
+  slug: prediction-markets
+  jekyll_category: polymarket
+  image: /images/2.jpg
+  description: Polymarket arbitrage, market microstructure, and probability modeling
+
+- name: Web3 Basics
+  slug: web3-basics
+  jekyll_category: layer2
+  image: /images/wallhaven-0w8l26.jpg
+  description: Appchain architecture, smart contract fundamentals, and scalability

@@ -2,6 +2,25 @@
 layout: default
 ---
 
+<!-- Category Cards -->
+<div class="category-grid">
+  {% for cat in site.data.categories %}
+  {% assign count = site.posts | where: "category", cat.jekyll_category | size %}
+  <a href="/categories/{{ cat.slug }}/" class="category-card">
+    <div class="category-card-bg" style="background-image: url('{{ cat.image }}')"></div>
+    <div class="category-card-overlay"></div>
+    <div class="category-card-content">
+      <h2 class="category-card-title">{{ cat.name }}</h2>
+      <span class="category-card-count">{{ count }} article{% if count > 1 %}s{% endif %}</span>
+      <p class="category-card-desc">{{ cat.description }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<!-- Recent Posts -->
+<h2 class="section-heading">Recent Posts</h2>
+
 <div class="post-list">
   {% for post in paginator.posts %}
   <article class="post-card">

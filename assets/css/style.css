@@ -118,6 +118,86 @@ a:hover { color: var(--accent); }
   margin: 0 auto;
 }
 
+/* Category Cards */
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.category-card {
+  position: relative;
+  height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  border: 1px solid var(--border);
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.category-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform .4s;
+}
+
+.category-card:hover .category-card-bg {
+  transform: scale(1.05);
+}
+
+.category-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(0,0,0,0.9) 0%,
+    rgba(0,0,0,0.35) 45%,
+    rgba(0,0,0,0.5) 100%);
+}
+
+.category-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+}
+
+.category-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.category-card-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.category-card-desc {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.section-heading {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
 /* Post Cards */
 .post-list { display: flex; flex-direction: column; gap: 14px; }
 
@@ -328,5 +408,6 @@ a:hover { color: var(--accent); }
   .sidebar-nav { flex-direction: row; justify-content: center; gap: 0; }
   .sidebar-links { margin-top: 16px; }
   .main { margin-left: 0; padding: 24px 16px 60px; }
+  .category-grid { grid-template-columns: 1fr; }
   .post-header .post-title { font-size: 22px; }
 }
