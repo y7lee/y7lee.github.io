@@ -110,8 +110,12 @@ a:hover { color: var(--accent); }
 .main {
   margin-left: var(--sidebar-w);
   flex: 1;
-  max-width: 720px;
   padding: 40px 32px 80px;
+}
+
+.main-inner {
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 /* Post Cards */
