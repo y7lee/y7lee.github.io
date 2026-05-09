@@ -271,6 +271,46 @@ a:hover { color: var(--accent); }
 .post-content a { text-decoration: underline; text-underline-offset: 2px; }
 .post-content a:hover { color: var(--accent); }
 
+/* Lightbox */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-overlay.open {
+  display: flex;
+}
+
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  color: #888;
+  font-size: 36px;
+  cursor: pointer;
+  transition: color .2s;
+  line-height: 1;
+}
+.lightbox-close:hover { color: #fff; }
+
+.post-content a:has(img) {
+  cursor: zoom-in;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .layout { flex-direction: column; }
