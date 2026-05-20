@@ -3,7 +3,7 @@ layout: post
 title: "从发现赚钱机会到Jaredfromsubway"
 description: "拆解以太坊最大MEV机器人的链上行为，从LP做市数据中发现真相"
 date: 2026-05-19
-category: mev
+category: defi
 tags: [mev jaredfromsubway uniswap-v4 liquidity-providing ethereum]
 ---
 
